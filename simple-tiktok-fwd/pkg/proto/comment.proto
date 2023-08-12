@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "../pb;pb";
+import "user.proto";
+
+// protoc --go_out=. comment.proto
+// protoc --go-grpc_out=. comment.proto
+
+service CommentService {
+  // 发布评论
+  rpc CommentAction(CommentActionReq) returns (CommentActionRsp);
+  // 获取视频评论
+  rpc GetCommentList(GetCommentListReq) returns (GetCommentListRsp);
+}
+
+message Comment {
+  int64 id = 1;
+  UserInfo user = 2;
+  string content = 3;
+  string create_date = 4;
+}
+
+// *******************
+message CommentActionReq {
+  int64 user_id = 1;
+  int64 video_id = 2;
+  int64 comment_id = 3;
+  string comment_text = 4;
+  int64 action_type = 5;
+}
+
+message CommentActionRsp {
+  int32 status_code = 1;
+  string status_msg = 2;
+  Comment comment = 3;
+}
+// *******************
+
+
+// *******************
+message GetCommentListReq {
+  int64 video_id = 1;
+}
+
+message GetCommentListRsp {
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated Comment comment_list = 3; // 评论列表
+}
+// *******************
+
+
+
+
+
+
+
+
+

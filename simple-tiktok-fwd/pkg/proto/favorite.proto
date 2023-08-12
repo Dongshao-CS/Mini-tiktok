@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+option go_package = "../pb;pb";
+
+import "video.proto";
+// protoc --go_out=. favorite.proto
+
+
+service FavoriteService {
+  // 点赞 取消赞
+  rpc FavoriteAction(FavoriteActionReq) returns (FavoriteActionRsp);
+  // 获取喜欢的视频列表
+  rpc GetFavoriteVideoIdList(GetFavoriteVideoIdListReq) returns (GetFavoriteVideoIdListRsp);
+  // 获取喜欢视频列表
+  rpc IsFavoriteVideoDict(IsFavoriteVideoDictReq) returns (IsFavoriteVideoDictRsp);
+}
+
+message FavoriteUnit {
+  int64 user_id = 1;
+  int64 video_id = 2;
+}
+
+
+// *******************
+message FavoriteActionReq {
+  int64 user_id = 1;
+  int64 video_id = 2;
+  int64 action_type = 3;
+}
+
+message FavoriteActionRsp {
+  int32 status_code = 1;
+  string status_msg = 2;
+}
+// *******************
+
+
+// *******************
+message GetFavoriteVideoIdListReq {
+  int64 user_id = 1;
+}
+
+message GetFavoriteVideoIdListRsp {
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated int64 video_id_list = 3; // 关注者用户信息列表
+}
+// *******************
+
+
+// *******************
+message IsFavoriteVideoDictReq {
+  repeated FavoriteUnit favorite_unit_list = 1;
+}
+
+message IsFavoriteVideoDictRsp {
+  map<string, bool> is_favorite_dict = 1;
+}
+
+message FavoriteVideoListRsp{
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated  Video video_list = 3;
+}
+// **********************
+
+
+
+
