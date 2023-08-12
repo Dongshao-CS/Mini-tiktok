@@ -1,4 +1,4 @@
-## Mini_tiktok
+## Mini-tiktok
 项目来源于第五届字节跳动后端训练营，参考往届实现，对照2022.8最新的[极简版抖音APP接口文档](https://apifox.com/apidoc/shared-09d88f32-0b6c-4157-9d07-a36d32d7a75c/api-50707523)进行了完善。
 
 ## 技术选型
